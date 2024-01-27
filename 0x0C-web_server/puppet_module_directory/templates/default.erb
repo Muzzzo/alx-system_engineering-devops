@@ -1,0 +1,23 @@
+# puppet_module_directory/templates/default.erb
+
+# Nginx default configuration file
+
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html;
+
+    server_name _;
+
+    location / {
+        return 200 "Hello World!\n";
+    }
+
+    error_page 404 /error_404.html;
+    location = /error_404.html {
+        internal;
+    }
+}
+
