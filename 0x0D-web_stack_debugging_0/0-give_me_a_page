@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Start Apache to return a page containing Hello Holberton
+service apache2 start
+
+# Ensure Apache is running before exiting the script
+while true; do
+    if pgrep apache2 > /dev/null; then
+        break
+    fi
+done
+
+# Create a simple HTML page containing Hello Holberton
+echo "Hello Holberton" > /var/www/html/index.html
