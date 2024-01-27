@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Nginx configuration file path
+nginx_conf="/etc/nginx/sites-available/default"
+
+# Backup the original configuration file
+cp "$nginx_conf" "$nginx_conf.bak"
+
+# Define the redirection configuration block
+redirection_block=$(cat <<EOL
+location /redirect_me {
+    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+}
+EOL
+)
+
+# Add the redirection block to the Nginx configuration file
+sed -i "/server {/a $redirection_block" "$nginx_conf"
+
+# Restart Nginx to apply the changes
+sudo service nginx restart
+
+echo -e "\nRedirection configuration completed. ✅\n"
